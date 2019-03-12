@@ -1,0 +1,41 @@
+﻿<Window x:Class="Loan.Core.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="ShellView" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+<Grid Margin="10">
+        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="0">
+                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
+                <TextBlock Text="Loan"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="1">
+                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
+                <TextBlock Text="Loan"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="2">
+                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
+                <TextBlock Text="Loan"></TextBlock>
+            </StackPanel>
+
+        </Grid>
+</Grid>
+</Window>
+

@@ -6,9 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
-using Loan.Core.ViewModels;
 using Loan.Core.Views;
-using ReactiveUI;
 using Splat;
 
 namespace Loan.Core
@@ -20,7 +18,6 @@ namespace Loan.Core
     {
         public App()
         {
-            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
         }
     }
 }
