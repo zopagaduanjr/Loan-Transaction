@@ -6,6 +6,7 @@
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -14,28 +15,31 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-<Grid Margin="10">
-        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="0">
-                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
-                <TextBlock Text="Loan"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="1">
-                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
-                <TextBlock Text="Loan"></TextBlock>
-            </StackPanel>
+    <Grid Name="MainGrid" Margin="20,40,20,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Row 0-->
+        <TextBlock Text="Jewelry Store"  Style="{StaticResource MaterialDesignDisplay2TextBlock}" HorizontalAlignment="Center" Grid.Row="0"/>
+        <!--Row 1-->
+        <ToolBarTray Grid.Row="1" HorizontalAlignment="Center">
+            <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" >
+                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" 
+                             Margin="4" 
+                             IsChecked="True"  Name="LoadCustomerPage" Content="Customer" ToolTip="Customer Class" />
+                <Separator />
+                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                             Name="LoadTransactionPage" Content="Transaction" ToolTip="Transaction Class" />
+                <Separator />
+                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                             Name="LoadSettingsPage" Content="Settings" ToolTip="Settings Class" />
+                <Separator />
+            </ToolBar>
+        </ToolBarTray>
+        <!--Row 2-->
+        <ContentControl Grid.Row="2" x:Name="ActiveItem"/>
+    </Grid>
 
-            <StackPanel Orientation="Horizontal" Margin="10 0" Grid.Row="2">
-                <materialDesign:PackIcon Kind="Money100" Foreground="Gray"/>
-                <TextBlock Text="Loan"></TextBlock>
-            </StackPanel>
-
-        </Grid>
-</Grid>
 </Window>
-

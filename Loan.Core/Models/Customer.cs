@@ -11,11 +11,10 @@ namespace Loan.Core.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }
-        public Double AmountLoan { get; set; }
 
-        public Customer()
-        {
-            
-        }
+        public List<Jewelry> Jewelries { get; set; }
+
+        public List<LoanInfo> Loans { get; set; }
+
     }
 }

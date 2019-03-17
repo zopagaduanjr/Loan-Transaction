@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace Loan.Core.ViewModels
 {
-    public class BusinessViewModel : Screen
+    public class InventoryViewModel : Screen
     {
 
     }
