@@ -19,29 +19,111 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="Customers"   HorizontalAlignment="Center" SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}"
-                  HorizontalContentAlignment="Center">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="150"
-                                    DisplayMemberBinding="{Binding Name, Mode=TwoWay}"
-                                    Header="Name" />
-                    <GridViewColumn Width="150"
-                                    DisplayMemberBinding="{Binding Price,  Mode=TwoWay}"
-                                    Header="Price" />
-                    <GridViewColumn Width="150"
-                                    DisplayMemberBinding="{Binding Description,  Mode=TwoWay}"
-                                    Header="Description" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="AddRandomCustomerCommand" Margin="50,0,0,0"
-                Grid.Row="1" HorizontalAlignment="Left" Height="35" >
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="PersonAddOutline" Width="21" Height="21" />
-                <Label Margin="10,0,0,0" Content="Add Random Person"/>
-            </StackPanel>
-        </Button>
+        <materialDesign:Card MaxWidth="1200" MaxHeight="900" Padding="5,5,0,0"  >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="FolderMultipleOutline" Width="25" Height="25"  />
+                        <Label Margin="10,0,0,0" Content="Business Details" FontWeight="Bold"/>
+                    </StackPanel>
+                </TextBlock>
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" MaxHeight="320" HorizontalAlignment="Center">
+                        <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="TreasureChest" Width="25" Height="25"  />
+                                <Label Margin="10,0,0,0" Content="Pawned Jewelries" FontWeight="Bold"/>
+                            </StackPanel>
+                        </TextBlock>
+                        <ListView x:Name="PawnedJewelry"   MaxHeight="320"
+                                  HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
+                                                    Header="Type" />
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding UniqueId,  Mode=TwoWay}"
+                                                    Header="Unique Id" />
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
+                                                    Header="Actual Value" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" MaxHeight="320" HorizontalAlignment="Center">
+                        <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="AccountGroupOutline" Width="25" Height="25"  />
+                                <Label Margin="10,0,0,0" Content="Business Accounts" FontWeight="Bold"/>
+                            </StackPanel>
+                        </TextBlock>
+                        <ListView x:Name="Customers"  SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}" MaxHeight="320"
+                                  HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding Name, Mode=TwoWay}"
+                                                    Header="Name" />
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding Address,  Mode=TwoWay}"
+                                                    Header="Address" />
+                                    <GridViewColumn Width="150"
+                                                    DisplayMemberBinding="{Binding ContactNumber,  Mode=TwoWay}"
+                                                    Header="Contact Number" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+
+                </Grid>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Height="50">
+                    <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="Developer Mode" VerticalAlignment="Center"/>
+                    <ToggleButton  Name="DeveloperMode"  Height="50"  Margin="10,2,0,0"
+                                   Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                   ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
+                        <materialDesign:PackIcon
+                            Kind="Glasses"
+                            RenderTransformOrigin=".5,.5">
+                            <materialDesign:PackIcon.RenderTransform>
+                                <RotateTransform
+                                    Angle="45" />
+                            </materialDesign:PackIcon.RenderTransform>
+                        </materialDesign:PackIcon>
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon
+                                Kind="Glasses" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Visibility="{Binding DeveloperMode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <materialDesign:Badged 
+                                           Badge="{materialDesign:PackIcon Glasses}"
+                                           BadgeColorZoneMode="Accent">
+                        <Button Content="Random Customer" Name="AddRandomCustomerCommand"   Margin="10,0,0,10" />
+                    </materialDesign:Badged>
+                    <materialDesign:Badged 
+                        Badge="{materialDesign:PackIcon Glasses}"
+                        BadgeColorZoneMode="Accent">
+                        <Button Content="Random Jewel" Name="AddRandomJewelry" Margin="10,0,0,10"/>
+                    </materialDesign:Badged>
+
+                </StackPanel>
+            </Grid>
+
+        </materialDesign:Card>
 
     </Grid>
 </UserControl>

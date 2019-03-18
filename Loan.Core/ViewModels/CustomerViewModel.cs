@@ -13,6 +13,7 @@ namespace Loan.Core.ViewModels
         //ctor
         public CustomerViewModel()
         {
+            DateTime = DateTime.Now;
         }
 
         //fields
@@ -24,19 +25,20 @@ namespace Loan.Core.ViewModels
         private string _contactNumber;
         private Customer _customer;
         private char _firstLetter;
+        private DateTime _dateTime;
+        private string _dateTimeString;
+        private string _money;
 
         public Customer Customer
         {
             get => _customer;
             set => _customer = value;
         }
-
         public SettingsViewModel SettingsViewModel
         {
             get => _settingsViewModel;
             set => _settingsViewModel = value;
         }
-
         public BindableCollection<Jewelry> Jewelries
         {
             get
@@ -46,7 +48,6 @@ namespace Loan.Core.ViewModels
             }
             set => _jewelries = value;
         }
-
         public BindableCollection<LoanInfo> Loans
         {
             get
@@ -56,7 +57,6 @@ namespace Loan.Core.ViewModels
             }
             set => _loans = value;
         }
-
         public string FullName
         {
             get
@@ -65,8 +65,7 @@ namespace Loan.Core.ViewModels
                 return fullname;
             }
             set => _fullName = value;
-        }
-
+        }   
         public string Address
         {
             get
@@ -76,7 +75,6 @@ namespace Loan.Core.ViewModels
             }
             set => _address = value;
         }
-
         public string ContactNumber
         {
             get
@@ -87,10 +85,41 @@ namespace Loan.Core.ViewModels
             set => _contactNumber = value;
         }
 
+        public string Money
+        {
+            get
+            {
+                var mon = SettingsViewModel.SelectedCustomer.Money.ToString();
+                return mon;
+            }
+            set
+            {
+                _money = value;
+                NotifyOfPropertyChange(() => Money);
+
+            }
+        }
+
         public char FirstLetter
         {
             get => FullName[0];
             set => _firstLetter = value;
         }
+        public string DateTimeString
+        {
+            get => _dateTimeString;
+            set => _dateTimeString = value;
+        }
+        public DateTime DateTime
+        {
+            get => _dateTime;
+            set
+            {
+                _dateTime = value;
+                DateTimeString = value.ToString();
+                NotifyOfPropertyChange(() => DateTimeString);
+            }
+        }
+
     }
 }

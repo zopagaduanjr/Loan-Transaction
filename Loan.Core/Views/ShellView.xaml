@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ShellView" Height="850" Width="1000"
+        Title="ShellView" Height="850" Width="1200"
         WindowStartupLocation="CenterScreen"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -39,12 +39,8 @@
                                  Name="LoadTransactionPage" Content="Transaction" ToolTip="Transaction Class" />
                     <Separator />
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
-                                 Name="LoadSettingsPage" Content="Settings" ToolTip="Settings Class" />
+                                 Name="LoadSettingsPage" Content="Business(Confidential)" ToolTip="Settings Class" />
                     <Separator />
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
-                                 Name="LoadBusinessPage" Content="Business(Confidential)" ToolTip="Business Class" />
-                    <Separator />
-
                 </ToolBar>
             </ToolBarTray>
             <!--Column 1-->

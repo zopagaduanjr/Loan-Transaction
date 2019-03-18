@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Loan.Core.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace Loan.Core.Views
 {
@@ -24,5 +26,6 @@ namespace Loan.Core.Views
         {
             InitializeComponent();
         }
+
     }
 }

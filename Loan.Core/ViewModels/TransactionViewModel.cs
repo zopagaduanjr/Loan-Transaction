@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using Caliburn.Micro;
 using Loan.Core.Models;
+using Loan.Core.Properties;
 
 namespace Loan.Core.ViewModels
 {
@@ -34,12 +35,20 @@ namespace Loan.Core.ViewModels
         private bool _loanTransactionCondition;
         private bool _paymentTransactionCondition;
         private LoanInfo _selectedLoan;
+        private string _daysPassed;
+        private SettingsViewModel _settingsViewModel;
+
         public CustomerViewModel CustomerViewModel
         {
             get => _customerViewModel;
             set => _customerViewModel = value;
         }
 
+        public SettingsViewModel SettingsViewModel
+        {
+            get => _settingsViewModel;
+            set => _settingsViewModel = value;
+        }
 
         public BindableCollection<Jewelry> PersonJewelries
         {
@@ -79,7 +88,7 @@ namespace Loan.Core.ViewModels
                     _selectedJewelry = value;
                     JewelryToGive = SelectedJewelry.Type.ToString();
                     Amount = SelectedJewelry.ActualValue.ToString();
-                    DateTime = System.DateTime.Now.ToString();
+                    DateTime = CustomerViewModel.DateTime.ToString();
                     LoanTransactionCondition = true;
                     NotifyOfPropertyChange(() => LoanTransactionCondition);
                     NotifyOfPropertyChange(() => SelectedJewelry);
@@ -113,17 +122,22 @@ namespace Loan.Core.ViewModels
                 if (value != null)
                 {
                     _selectedLoan = value;
+                    value.CheckOutAmount = InterestCalculator();
+                    DaysPassed = TotalDaysCalculator().ToString();
                     PaymentTransactionCondition = true;
                     NotifyOfPropertyChange(() => SelectedLoan);
                     NotifyOfPropertyChange(() => PaymentTransactionCondition);
+                    NotifyOfPropertyChange(() => DaysPassed);
 
                 }
                 else
                 {
                     _selectedLoan = value;
+                    DaysPassed = null;
                     PaymentTransactionCondition = false;
                     NotifyOfPropertyChange(() => SelectedLoan);
                     NotifyOfPropertyChange(() => PaymentTransactionCondition);
+                    NotifyOfPropertyChange(() => DaysPassed);
 
                 }
             }
@@ -155,6 +169,12 @@ namespace Loan.Core.ViewModels
             set => _dateTime = value;
         }
 
+        public string DaysPassed
+        {
+            get => _daysPassed;
+            set => _daysPassed = value;
+        }
+
         //isclickables
         public bool IsLoanTransactionEnabled
         {
@@ -177,9 +197,10 @@ namespace Loan.Core.ViewModels
             set => _paymentTransactionCondition = value;
         }
 
-        //methods
+        //commands
         public void LoanTransactViewer()
         {
+            SelectedLoan = null;
             IsLoanTransactionEnabled = true;
             IsPaymentTransactionEnabled = false;
             NotifyOfPropertyChange(() => IsLoanTransactionEnabled);
@@ -188,27 +209,53 @@ namespace Loan.Core.ViewModels
         }
         public void PaymentTransactViewer()
         {
+            SelectedLoan = null;
             IsLoanTransactionEnabled = false;
             IsPaymentTransactionEnabled = true;
             NotifyOfPropertyChange(() => IsLoanTransactionEnabled);
             NotifyOfPropertyChange(() => IsPaymentTransactionEnabled);
+
 
         }
         public void LoanTransactionCommand()
         {
             var personloaning = CustomerViewModel.SettingsViewModel.SelectedCustomer;
             var jewel = SelectedJewelry;
+            SettingsViewModel.PawnedJewelry.Add(jewel);
             jewel.UniqueId = RandomDigitGenerator();
             var loninfo = new LoanInfo();
             loninfo.Amount = jewel.ActualValue;
-            loninfo.DateTime = System.DateTime.Now;
+            loninfo.DateTime = CustomerViewModel.DateTime;
             loninfo.Jewelry = jewel;
             loninfo.Customer = personloaning;
             personloaning.Jewelries.Remove(jewel);
             NotifyOfPropertyChange(() => PersonJewelries);
             EstablishmentLoanInfo.Add(loninfo);
             personloaning.Loans.Add(loninfo);
+            NotifyOfPropertyChange(() => PersonLoanInfo);
+            SelectedJewelry = PersonJewelries.FirstOrDefault();
+            NotifyOfPropertyChange(() => SelectedJewelry);
+
         }
+        public void PaymentTransactionCommand()
+        {
+            var topay = InterestCalculator();
+            if (SettingsViewModel.SelectedCustomer.Money >= topay)
+            {
+                SettingsViewModel.SelectedCustomer.Money = SettingsViewModel.SelectedCustomer.Money - topay;
+                SettingsViewModel.SelectedCustomer.Jewelries.Add(SelectedLoan.Jewelry);
+                SettingsViewModel.PawnedJewelry.Remove(SelectedLoan.Jewelry);
+                SettingsViewModel.SelectedCustomer.Loans.Remove(SelectedLoan);
+                NotifyOfPropertyChange(() => SettingsViewModel.SelectedCustomer);
+                NotifyOfPropertyChange(() => PersonLoanInfo);
+                NotifyOfPropertyChange(() => SettingsViewModel.PawnedJewelry);
+
+            }
+            NotifyOfPropertyChange(() => SelectedLoan);
+
+        }
+
+        //methods
         public int RandomDigitGenerator()
         {
             var value = 0;
@@ -231,5 +278,35 @@ namespace Loan.Core.ViewModels
 
             return value;
         }
+        public Double InterestCalculator()
+        {
+            var lon = SelectedLoan;
+            var amunt = lon.Amount;
+            var origindate = lon.DateTime;
+            var dayspassed = CustomerViewModel.DateTime;
+            var rate = 0.1;
+            var time = (dayspassed - origindate).TotalDays;
+            var week = time / 7;
+            var butal = amunt * rate * week;
+            var tot = amunt + butal;
+            return tot;
+        }
+        public double TotalDaysCalculator()
+        {
+            var lon = SelectedLoan;
+            var origindate = lon.DateTime;
+            var dayspassed = CustomerViewModel.DateTime;
+            var time = (dayspassed - origindate).TotalDays;
+            return time;
+        }
+
+        //dev commands
+        public void AddOneWeekCommand()
+        {
+            CustomerViewModel.DateTime = CustomerViewModel.DateTime.AddDays(7);
+            NotifyOfPropertyChange(() => CustomerViewModel.DateTime);
+
+        }
+
     }
 }

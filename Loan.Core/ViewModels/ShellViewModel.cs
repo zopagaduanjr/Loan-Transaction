@@ -15,9 +15,15 @@ namespace Loan.Core.ViewModels
         {
             LoadCustomerPage();
         }
-        CustomerViewModel customerViewModel = new CustomerViewModel();
+
+        public CustomerViewModel customerViewModel
+        {
+            get => _customerViewModel;
+            set => _customerViewModel = value;
+        }
+
         TransactionViewModel transactionViewModel = new TransactionViewModel();
-        BusinessViewModel businessViewModel = new BusinessViewModel();
+        private CustomerViewModel _customerViewModel = new CustomerViewModel();
 
         public void LoadCustomerPage()
         {
@@ -27,19 +33,13 @@ namespace Loan.Core.ViewModels
         {
             ActivateItem(customerViewModel.SettingsViewModel);
         }
-
         public void LoadTransactionPage()
         {
+            transactionViewModel.SettingsViewModel = customerViewModel.SettingsViewModel;
             transactionViewModel.CustomerViewModel = customerViewModel;
             transactionViewModel.SelectedJewelry = null;
+            transactionViewModel.LoanTransactViewer();
             ActivateItem(transactionViewModel);
-        }
-
-        public void LoadBusinessPage()
-        {
-            businessViewModel.SettingsViewModel = customerViewModel.SettingsViewModel;
-            businessViewModel.TransactionViewModel = transactionViewModel;
-            ActivateItem(businessViewModel);
         }
 
     }

@@ -12,6 +12,7 @@ namespace Loan.Core.Models
         public string Name { get; set; }
         public List<Customer> Customers { get; set; }
         public List<LoanInfo> LoanInfos { get; set; }
+        public double LoanRate { get; set; }
 
     }
 }

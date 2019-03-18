@@ -111,14 +111,10 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Jewelry.cs" />
     <Compile Include="Models\LoanInfo.cs" />
-    <Compile Include="ViewModels\BusinessViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
-    <Compile Include="Views\BusinessView.xaml.cs">
-      <DependentUpon>BusinessView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -160,10 +156,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\BusinessView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
