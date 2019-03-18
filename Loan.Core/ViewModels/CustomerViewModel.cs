@@ -19,11 +19,11 @@ namespace Loan.Core.ViewModels
         private SettingsViewModel _settingsViewModel = new SettingsViewModel();
         private BindableCollection<Jewelry> _jewelries = new BindableCollection<Jewelry>();
         private BindableCollection<LoanInfo> _loans = new BindableCollection<LoanInfo>();
-
-        private Customer _customer;
-        private string _name;
+        private string _fullName;
         private string _address;
         private string _contactNumber;
+        private Customer _customer;
+        private char _firstLetter;
 
         public Customer Customer
         {
@@ -57,14 +57,14 @@ namespace Loan.Core.ViewModels
             set => _loans = value;
         }
 
-        public string Name
+        public string FullName
         {
             get
             {
                 var fullname = SettingsViewModel.SelectedCustomer.Name;
                 return fullname;
             }
-            set => _name = value;
+            set => _fullName = value;
         }
 
         public string Address
@@ -85,6 +85,12 @@ namespace Loan.Core.ViewModels
                 return num;
             }
             set => _contactNumber = value;
+        }
+
+        public char FirstLetter
+        {
+            get => FullName[0];
+            set => _firstLetter = value;
         }
     }
 }

@@ -4,51 +4,164 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Loan.Core.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>    
-        <Grid Grid.Column="0" Name="LoanTransak">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.4*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="0.4*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Jewelry To Be Pawned" Grid.Row="0"/>
-            <ListView x:Name="PersonJewelries"   HorizontalAlignment="Center" Grid.Row="1" SelectedItem="{Binding Path=SelectedJewelry, Mode=TwoWay}"
-                      HorizontalContentAlignment="Center">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
-                                        Header="Type" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
-                                        Header="Quality" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
-                                        Header="ActualValue" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <TextBlock Text="Receipt Generated" Grid.Row="2"/>
-            <StackPanel Grid.Row="3" >
+    <Grid Margin="35,35,0,0">
+        <materialDesign:Card MaxWidth="1200" MaxHeight="1000" Padding="3" Height="500" >
+            <StackPanel>
+                <!--Title -->
+                <TextBlock Height="30" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Business" Width="25" Height="25" />
+                    <Label Margin="10,0,0,0" Content="Business Transactions" FontWeight="Bold"/>
+                </StackPanel>
+                </TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Row 0-->
+                    <ToolBarTray Grid.Row="0" HorizontalAlignment="Center">
+                        <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" >
+                            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" 
+                                         Margin="4" 
+                                         IsChecked="True"  Name="LoanTransactViewer" Content="Loan Transaction" ToolTip="Product Class" />
+                            <Separator />
+                            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                                         Name="PaymentTransactViewer" Content="Payment Transaction" ToolTip="Calculations Class" />
+                        </ToolBar>
+                    </ToolBarTray>
+                    <!--Row 1-->
+                    <Grid Grid.Row="1" Visibility="{Binding IsLoanTransactionEnabled, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="2*"/>
+                       </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Jewelry to be pawned" HorizontalAlignment="Center"/>
+                        <materialDesign:Card MaxWidth="600" MaxHeight="420" Grid.Row="1" Grid.Column="0" Margin="10,10,0,0" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition MaxHeight="270"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Jewel" Width="25" Height="25"  />
+                                        <Label Margin="10,0,0,0" Content="Owned Jewelry" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </TextBlock>
+                                <ListView x:Name="PersonJewelries" Grid.Row="1" HorizontalAlignment="Center" SelectedItem="{Binding SelectedJewelry, Mode=TwoWay}"
+                                          HorizontalContentAlignment="Center">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="150"
+                                                            DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
+                                                            Header="Type" />
+                                            <GridViewColumn Width="150"
+                                                            DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
+                                                            Header="Quality" />
+                                            <GridViewColumn Width="150"
+                                                            DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
+                                                            Header="Actual Value" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
 
-                <TextBlock Text="Loanee:" />
-                <TextBlock Name="Name"/>
-                <TextBlock Text="Collateral:"/>
-                <TextBlock Name="JewelryToGive"/>
-                <TextBlock Text="Loan Amount:"/>
-                <TextBlock Name="Amount"/>
-                <TextBlock Text="Time:"/>
-                <TextBlock Name="DateTime"/>
+                        </materialDesign:Card>
+                        <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Loan Details" HorizontalAlignment="Center" Grid.Column="1"/>
+                        <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" Grid.Column="1" Grid.Row="1" 
+                                             MaxWidth="500" MaxHeight="750"  Padding="0,10,0,20" Margin="10,10,0,0">
+                            <StackPanel>
+                                <Expander HorizontalAlignment="Stretch" Header="Customer Info">
+                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Name : "/>
+                                            <TextBlock Text="{Binding CustomerViewModel.SettingsViewModel.SelectedCustomer.Name, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Address : "/>
+                                            <TextBlock Text="{Binding CustomerViewModel.SettingsViewModel.SelectedCustomer.Address, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="ContactNumber : "/>
+                                            <TextBlock Text="{Binding CustomerViewModel.SettingsViewModel.SelectedCustomer.ContactNumber, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
+                                <Border
+                                    Background="{DynamicResource MaterialDesignDivider}"
+                                    Height="1"
+                                    HorizontalAlignment="Stretch"
+                                    SnapsToDevicePixels="True" />
+                                <Expander HorizontalAlignment="Stretch" Header="Jewelry Info">
+                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Type : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.Type, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Quality : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.Quality, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Weight : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.Weight, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Discount : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.Discount, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Other Details : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.OtherDetail, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Actual Value : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.ActualValue, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
+                                <Border
+                                    Background="{DynamicResource MaterialDesignDivider}"
+                                    Height="1"
+                                    HorizontalAlignment="Stretch"
+                                    SnapsToDevicePixels="True" />
+                                <Expander HorizontalAlignment="Stretch" Header="Loan Info">
+                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Amount To Be Loaned : "/>
+                                            <TextBlock Text="{Binding SelectedJewelry.ActualValue, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Date of Transaction : "/>
+                                            <TextBlock Text="{Binding DateTime, Mode=TwoWay}"/>
+                                        </StackPanel>
 
+                                    </StackPanel>
+                                </Expander>
+                                <Button x:Name="LoanTransactionCommand" Margin="50,0,0,0" IsEnabled="{Binding LoanTransactionCondition, Mode=TwoWay}"
+                                         HorizontalAlignment="Left" Height="35" >
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CartOff" Width="21" Height="21" />
+                                        <Label Margin="10,0,0,0" Content="Continue to loan"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                        </materialDesign:Card>
+                    </Grid>
+                    <Grid Grid.Row="1" Visibility="{Binding IsPaymentTransactionEnabled, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    </Grid>
+                    </Grid>
             </StackPanel>
-        </Grid>
+        </materialDesign:Card>
     </Grid>
 </UserControl>

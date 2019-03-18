@@ -18,19 +18,31 @@ namespace Loan.Core.ViewModels
         //ctor
         public SettingsViewModel()
         {
-            var jewelry1 = new Jewelry(){Type = Models.Type.Bracelet, Quality = Quality._10k_, ActualValue = 234};
-            var jewelry2 = new Jewelry(){Type = Models.Type.Ring, Quality = Quality._18k_, ActualValue = 1500};
-            var jewelry3 = new Jewelry(){Type = Models.Type.Necklace, Quality = Quality._21k_, ActualValue = 12000};
+            var jewelry1 = new Jewelry(){Type = Models.Type.Bracelet, Quality = Quality._10k, ActualValue = 234 , OtherDetail = "nice ka"};
+            var jewelry2 = new Jewelry(){Type = Models.Type.Ring, Quality = Quality._18k, ActualValue = 1500};
+            var jewelry3 = new Jewelry(){Type = Models.Type.Necklace, Quality = Quality._21k, ActualValue = 12000};
+            var jewelry4 = new Jewelry(){Type = Models.Type.Necklace, Quality = Quality._21k, ActualValue = 555};
             var jewelries = new List<Jewelry>();
             jewelries.Add(jewelry1);
             jewelries.Add(jewelry2);
             jewelries.Add(jewelry3);
-            var loan = new List<LoanInfo>();
-            var customer1 = new Customer(){Name = "Greed", Address = "Davao",ContactNumber = "0999", Jewelries = jewelries, Loans = loan};
-            var customer2 = new Customer(){Name = "Envy", Address = "Cebu", ContactNumber = "0944", Jewelries = jewelries, Loans = loan };
-            var customer3 = new Customer(){Name = "Joy", Address = "Bohol", ContactNumber = "0933", Jewelries = jewelries, Loans = loan };
-            var customer4 = new Customer(){Name = "Sloth", Address = "Tagbilaran", ContactNumber = "0911", Jewelries = jewelries, Loans = loan };
-            var customer5 = new Customer(){Name = "Pride", Address = "Bulad", ContactNumber = "0922", Jewelries = jewelries, Loans = loan };
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            jewelries.Add(jewelry3);
+            var jeweee = new List<Jewelry>();
+            jeweee.Add(jewelry4);
+            var customer1 = new Customer(){Name = "Greed", Address = "Davao",ContactNumber = "0999", Jewelries = jeweee, Loans = new List<LoanInfo>()};
+            var customer2 = new Customer(){Name = "Envy", Address = "Cebu", ContactNumber = "0944", Jewelries = jewelries, Loans = new List<LoanInfo>() };
+            var customer3 = new Customer(){Name = "Joy", Address = "Bohol", ContactNumber = "0933", Jewelries = jewelries, Loans = new List<LoanInfo>() };
+            var customer4 = new Customer(){Name = "Sloth", Address = "Tagbilaran", ContactNumber = "0911", Jewelries = jewelries, Loans = new List<LoanInfo>() };
+            var customer5 = new Customer(){Name = "Pride", Address = "Bulad", ContactNumber = "0922", Jewelries = jewelries, Loans = new List<LoanInfo>() };
             Customers.Add(customer1);
             Customers.Add(customer2);
             Customers.Add(customer3);

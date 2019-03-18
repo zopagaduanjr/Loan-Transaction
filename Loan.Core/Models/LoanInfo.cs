@@ -11,7 +11,7 @@ namespace Loan.Core.Models
     {
         public int Id { get; set; }
 
-        public float Amount { get; set; }
+        public double Amount { get; set; }
         public DateTime DateTime { get; set; }
         public Jewelry Jewelry { get; set; }
         public Double AmountLoan { get; set; }

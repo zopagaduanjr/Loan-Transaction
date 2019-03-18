@@ -17,6 +17,7 @@ namespace Loan.Core.ViewModels
         }
         CustomerViewModel customerViewModel = new CustomerViewModel();
         TransactionViewModel transactionViewModel = new TransactionViewModel();
+        BusinessViewModel businessViewModel = new BusinessViewModel();
 
         public void LoadCustomerPage()
         {
@@ -30,9 +31,16 @@ namespace Loan.Core.ViewModels
         public void LoadTransactionPage()
         {
             transactionViewModel.CustomerViewModel = customerViewModel;
+            transactionViewModel.SelectedJewelry = null;
             ActivateItem(transactionViewModel);
         }
 
+        public void LoadBusinessPage()
+        {
+            businessViewModel.SettingsViewModel = customerViewModel.SettingsViewModel;
+            businessViewModel.TransactionViewModel = transactionViewModel;
+            ActivateItem(businessViewModel);
+        }
 
     }
 }

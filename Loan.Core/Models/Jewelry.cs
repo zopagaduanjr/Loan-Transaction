@@ -46,9 +46,9 @@ namespace Loan.Core.Models
 
     public enum Quality
     {
-        _10k_,
-        _18k_,
-        _21k_
+        _10k,
+        _18k,
+        _21k
 
     }
 }

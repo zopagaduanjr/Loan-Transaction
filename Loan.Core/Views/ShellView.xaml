@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800"
+        Title="ShellView" Height="850" Width="1000"
         WindowStartupLocation="CenterScreen"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -18,28 +18,38 @@
     <Grid Name="MainGrid" Margin="20,40,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--Row 0-->
         <TextBlock Text="Jewelry Store"  Style="{StaticResource MaterialDesignDisplay2TextBlock}" HorizontalAlignment="Center" Grid.Row="0"/>
         <!--Row 1-->
-        <ToolBarTray Grid.Row="1" HorizontalAlignment="Center">
-            <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" >
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" 
-                             Margin="4" 
-                             IsChecked="True"  Name="LoadCustomerPage" Content="Customer" ToolTip="Customer Class" />
-                <Separator />
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
-                             Name="LoadTransactionPage" Content="Transaction" ToolTip="Transaction Class" />
-                <Separator />
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
-                             Name="LoadSettingsPage" Content="Settings" ToolTip="Settings Class" />
-                <Separator />
-            </ToolBar>
-        </ToolBarTray>
-        <!--Row 2-->
-        <ContentControl Grid.Row="2" x:Name="ActiveItem"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Column 0-->
+            <ToolBarTray Grid.Column="0" HorizontalAlignment="Center" Orientation="Vertical">
+                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" >
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" 
+                                 Margin="4" 
+                                 IsChecked="True"  Name="LoadCustomerPage" Content="Customer" ToolTip="Customer Class" />
+                    <Separator />
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                                 Name="LoadTransactionPage" Content="Transaction" ToolTip="Transaction Class" />
+                    <Separator />
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                                 Name="LoadSettingsPage" Content="Settings" ToolTip="Settings Class" />
+                    <Separator />
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" 
+                                 Name="LoadBusinessPage" Content="Business(Confidential)" ToolTip="Business Class" />
+                    <Separator />
+
+                </ToolBar>
+            </ToolBarTray>
+            <!--Column 1-->
+            <ContentControl Grid.Column="1" x:Name="ActiveItem"/>
+        </Grid>
     </Grid>
 
 </Window>

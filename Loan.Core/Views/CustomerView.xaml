@@ -14,54 +14,135 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
+    <Grid Margin="35,35,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="Name" Grid.Row="0"/>
-        <TextBlock x:Name="Address" Grid.Row="1"/>
-        <TextBlock x:Name="ContactNumber" Grid.Row="2"/>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ListView x:Name="Jewelries"   HorizontalAlignment="Center"
-                      HorizontalContentAlignment="Center">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
-                                        Header="Type" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
-                                        Header="Quality" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
-                                        Header="ActualValue" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <ListView x:Name="Loans"   HorizontalAlignment="Center" Grid.Column="1"
-                      HorizontalContentAlignment="Center">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Amount, Mode=TwoWay}"
-                                        Header="Amount" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding DateTime,  Mode=TwoWay}"
-                                        Header="DateTime" />
-                        <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Jewelry,  Mode=TwoWay}"
-                                        Header="Jewelry" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <!-- row 0 / User Information -->
+        <materialDesign:Card Padding="3" MaxWidth="600" Height="120" >
+            <StackPanel>
+                <TextBlock Height="30" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="UserCardDetails" Width="25" Height="25" />
+                        <Label Margin="10,0,0,0" Content="User Details" FontWeight="Bold"/>
+                    </StackPanel>
+                </TextBlock>
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Column 0-->
+                    <Button 
+                        Margin="10,0,0,0"
+                        x:Name="FirstLetter"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        HorizontalAlignment="Left"
+                        ToolTip="MaterialDesignFloatingActionMiniButton"/>
+                    <!--Column 1-->
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Grid.Column="1">
+                        <TextBlock
+                            FontWeight="Bold"
+                            x:Name="FullName" />
+                        <TextBlock
+                            Text="27th Dan Eternal Ruler" />
+                    </StackPanel>
+                    <!--Column 2-->
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="HomeAccount" Width="21" Height="21" />
+                                <TextBlock Text="{Binding Path=Address, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Margin="10,0,0,0"
+                                />          
+                            </StackPanel>
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="PhoneClassic" Width="20" Height="20" />               
+                                <TextBlock Text="{Binding Path=ContactNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           Margin="10,0,0,0"
+                                           />
+                            </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+        <!-- row 2 / User Jewels-->
+        <materialDesign:Card MaxWidth="600" MaxHeight="220" Grid.Row="1" Padding="3" Margin="0,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MaxHeight="270"/>
+                </Grid.RowDefinitions>
+                <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Jewel" Width="25" Height="25"  />
+                        <Label Margin="10,0,0,0" Content="Owned Jewelry" FontWeight="Bold"/>
+                    </StackPanel>
+                </TextBlock>
+                <ListView x:Name="Jewelries" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
+                                            Header="Type" />
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
+                                            Header="Quality" />
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
+                                            Header="Actual Value" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
 
-        </Grid>
+        </materialDesign:Card>
+        <!-- row 3 / User Loans-->
+        <materialDesign:Card MaxWidth="600" MaxHeight="220" Grid.Row="2" Padding="3" Margin="0,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MaxHeight="270"/>
+                </Grid.RowDefinitions>
+                <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Money" Width="25" Height="25"  />
+                        <Label Margin="10,0,0,0" Content="Owned Loans" FontWeight="Bold"/>
+                    </StackPanel>
+                </TextBlock>
+                <ListView x:Name="Loans" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding DateTime, Mode=TwoWay}"
+                                            Header="Date Loaned" />
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding Amount,  Mode=TwoWay}" 
+                                            Header="Amount Loaned (PHP)" />
+                            <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding Jewelry.Type,  Mode=TwoWay}"
+                                            Header="Collateral" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+        </materialDesign:Card>
+
+
     </Grid>
+
 </UserControl>

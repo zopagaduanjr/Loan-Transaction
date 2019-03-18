@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Loan.Core.Views
 {
     /// <summary>
-    /// Interaction logic for InventoryView.xaml
+    /// Interaction logic for BusinessView.xaml
     /// </summary>
-    public partial class InventoryView : UserControl
+    public partial class BusinessView : UserControl
     {
-        public InventoryView()
+        public BusinessView()
         {
             InitializeComponent();
         }
