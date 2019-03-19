@@ -110,6 +110,7 @@
                         </materialDesign:ToggleButtonAssist.OnContent>
                     </ToggleButton>
                 </StackPanel>
+                <!-- row 3 / Dev Commands-->
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Visibility="{Binding DeveloperMode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource BooleanToVisibilityConverter}}">
                     <materialDesign:Badged 
                                            Badge="{materialDesign:PackIcon Glasses}"
@@ -123,12 +124,12 @@
                     </materialDesign:Badged>
 
                 </StackPanel>
+                <!-- row 4 / Business Commands-->
                 <StackPanel Orientation="Horizontal" Grid.Row="4">
-                    <materialDesign:Badged Grid.Column="1" BadgeColorZoneMode="Accent">
+                    <materialDesign:Badged  BadgeColorZoneMode="Accent">
                         <Button Content="Add Customer"   Name="OpenAddCustomer"
                                 Margin="10,0,0,10" materialDesign:RippleAssist.Feedback="#DD000000" />
                     </materialDesign:Badged>
-
                 </StackPanel>
             </Grid>
 

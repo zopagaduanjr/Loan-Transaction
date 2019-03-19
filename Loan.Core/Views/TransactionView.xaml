@@ -283,7 +283,8 @@
 
                     </Grid>
                     </Grid>
-                <materialDesign:Badged Visibility="{Binding SettingsViewModel.DeveloperMode, Mode=TwoWay ,Converter={StaticResource BooleanToVisibilityConverter}}"
+                <materialDesign:Badged Margin="10"
+                    Visibility="{Binding SettingsViewModel.DeveloperMode, Mode=TwoWay ,Converter={StaticResource BooleanToVisibilityConverter}}"
                     Badge="{materialDesign:PackIcon Glasses}"
                     BadgeColorZoneMode="Accent">
                     <Button Content="Add Week" Name="AddOneWeekCommand"/>

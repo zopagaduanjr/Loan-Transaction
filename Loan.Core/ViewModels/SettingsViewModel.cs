@@ -29,7 +29,7 @@ namespace Loan.Core.ViewModels
         }
 
         //properties
-        private static Random rand = new Random(DateTime.Now.Second);
+        private static Random rand = new Random(DateTime.Now.Millisecond);
         private BindableCollection<Customer> _customers = new BindableCollection<Customer>();
         private Customer _selectedCustomer;
         private bool _developerMode;
@@ -71,7 +71,10 @@ namespace Loan.Core.ViewModels
             get => _addCustomerDialogViewModel;
             set => _addCustomerDialogViewModel = value;
         }
+
+
         WindowManager windowManager = new WindowManager();
+
         public bool DeveloperMode
         {
             get => _developerMode;
@@ -264,6 +267,11 @@ namespace Loan.Core.ViewModels
                 var streng = value.ToString();
                 var lenth = streng.Length;
                 var x = lenth - totlength;
+                if (x < 0)
+                {
+                    streng = streng + "55";
+                }
+
                 streng = streng.Substring(0, streng.Length - x);
                 value = Int32.Parse(streng);
             }

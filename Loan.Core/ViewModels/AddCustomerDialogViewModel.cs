@@ -236,6 +236,11 @@ namespace Loan.Core.ViewModels
                 var streng = value.ToString();
                 var lenth = streng.Length;
                 var x = lenth - totlength;
+                if (x < 0)
+                {
+                    streng = streng + "55";
+                }
+
                 streng = streng.Substring(0, streng.Length - x);
                 value = Int32.Parse(streng);
             }

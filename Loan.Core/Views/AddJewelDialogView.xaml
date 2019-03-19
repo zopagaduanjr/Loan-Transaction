@@ -1,0 +1,78 @@
+﻿<Window x:Class="Loan.Core.Views.AddJewelDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Loan.Core.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Title="Register New Jewelry" Height="550" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Margin="20" MaxHeight="380">
+            <TextBlock Height="30" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Jewel" Width="25" Height="25" />
+                        <Label Margin="10,0,0,0" Content="Jewelry Details" FontWeight="Bold"/>
+                    </StackPanel>
+            </TextBlock>
+            <ComboBox Name="JType" SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                materialDesign:HintAssist.Hint="Jewelry Type"
+                MinWidth="72"
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Separator Height="8"/>
+            <ComboBox Name="JQuality" SelectedItem="{Binding SelectedQuality, Mode=TwoWay}"
+                      materialDesign:HintAssist.Hint="Quality Type"
+                      MinWidth="72"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Separator Height="8"/>
+            <TextBox Name="Weight"  materialDesign:HintAssist.Hint="Weight" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="Discount"  materialDesign:HintAssist.Hint="Discount (Decimal Form)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="ActualValue"  materialDesign:HintAssist.Hint="Actual Value" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="OtherDetail"
+                TextWrapping="Wrap"
+                VerticalAlignment="Stretch"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Auto"
+                SpellCheck.IsEnabled="True"
+                materialDesign:HintAssist.Hint="Other Detail" Style="{StaticResource MaterialDesignFloatingHintTextBox}"      
+                Height="80"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:Badged Grid.Column="0" Visibility="{Binding DevMode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource BooleanToVisibilityConverter}}"
+                Badge="{materialDesign:PackIcon Glasses}"
+                BadgeColorZoneMode="Accent">
+                <Button Content="Random Fields" Name="AddRandomFields"   Margin="50,0,0,10" />
+            </materialDesign:Badged>
+            <materialDesign:Badged Grid.Column="1" BadgeColorZoneMode="Accent">
+                <Button Content="Add Jewelry"   Name="Ok"
+                        Margin="10,0,0,10" materialDesign:RippleAssist.Feedback="#DD000000" />
+            </materialDesign:Badged>
+
+        </Grid>
+    </Grid>
+</Window>

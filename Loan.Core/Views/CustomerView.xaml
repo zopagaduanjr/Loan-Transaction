@@ -87,11 +87,12 @@
             </StackPanel>
         </materialDesign:Card>
         <!-- row 2 / User Jewels-->
-        <materialDesign:Card MaxWidth="600" MaxHeight="220" Grid.Row="1" Padding="0,5,0,0"  Margin="0,10,0,0">
+        <materialDesign:Card MaxWidth="600" MaxHeight="300" Grid.Row="1" Padding="0,5,0,0"  Margin="0,10,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition MaxHeight="270"/>
+                    <RowDefinition MaxHeight="50"/>
                 </Grid.RowDefinitions>
                 <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -114,6 +115,19 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <materialDesign:Badged  BadgeColorZoneMode="Accent">
+                        <Button Content="Add Jewel"   Name="OpenAddJewel"
+                                Margin="10,0,0,10" materialDesign:RippleAssist.Feedback="#DD000000" />
+                    </materialDesign:Badged>
+                    <materialDesign:Badged Visibility="{Binding DevMode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Badge="{materialDesign:PackIcon Glasses}"
+                        BadgeColorZoneMode="Accent">
+                        <Button Content="Random Jewel" Name="AddRandomJewelry" Margin="10,0,0,10"/>
+                    </materialDesign:Badged>
+
+                </StackPanel>
+
             </Grid>
 
         </materialDesign:Card>
