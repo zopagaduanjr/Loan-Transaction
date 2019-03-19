@@ -1,0 +1,50 @@
+﻿<Window x:Class="Loan.Core.Views.AddCustomerDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Loan.Core.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Title="Register New Customer" Height="450" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Margin="20" MaxHeight="300">
+            <TextBlock Height="30" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="PersonAdd" Width="25" Height="25" />
+                        <Label Margin="10,0,0,0" Content="User Details" FontWeight="Bold"/>
+                    </StackPanel>
+                </TextBlock>
+            <TextBox Name="Name"  materialDesign:HintAssist.Hint="Full Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="Address"  materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="ContactNumber"  materialDesign:HintAssist.Hint="Contact Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+            <TextBox Name="Money"  materialDesign:HintAssist.Hint="Money" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <Separator Height="8"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:Badged Grid.Column="0" Visibility="{Binding DevMode, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource BooleanToVisibilityConverter}}"
+                Badge="{materialDesign:PackIcon Glasses}"
+                BadgeColorZoneMode="Accent">
+                <Button Content="Random Fields" Name="AddRandomFields"   Margin="50,0,0,10" />
+            </materialDesign:Badged>
+            <materialDesign:Badged Grid.Column="1" BadgeColorZoneMode="Accent">
+                <Button Content="Add Customer"   Name="Ok"
+                        Margin="10,0,0,10" materialDesign:RippleAssist.Feedback="#DD000000" />
+            </materialDesign:Badged>
+
+        </Grid>
+    </Grid>
+</Window>

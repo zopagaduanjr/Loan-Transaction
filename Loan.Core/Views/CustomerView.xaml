@@ -53,7 +53,7 @@
                             x:Name="FullName" />
                         <TextBlock HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <materialDesign:PackIcon Kind="PhilippinePeso" Width="20" Height="20" />               
+                                <materialDesign:PackIcon Kind="Money" Width="20" Height="20" />               
                                 <TextBlock Text="{Binding Path=Money, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                            Margin="10,0,0,0"
                                 />
@@ -99,18 +99,18 @@
                         <Label Margin="10,0,0,0" Content="Owned Jewelry" FontWeight="Bold"/>
                     </StackPanel>
                 </TextBlock>
-                <ListView x:Name="Jewelries" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                <ListView x:Name="Jewelries" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,8">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="150"
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
                                             Header="Type" />
-                            <GridViewColumn Width="150"
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
                                             Header="Quality" />
-                            <GridViewColumn Width="150"
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
-                                            Header="Actual Value" />
+                                            Header="Value (PHP)" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -130,16 +130,16 @@
                         <Label Margin="10,0,0,0" Content="Owned Loans" FontWeight="Bold"/>
                     </StackPanel>
                 </TextBlock>
-                <ListView x:Name="Loans" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                <ListView x:Name="Loans" Grid.Row="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,8">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="150"
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding DateTime, Mode=TwoWay}"
                                             Header="Date Loaned" />
-                            <GridViewColumn Width="150"
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding Amount,  Mode=TwoWay}" 
-                                            Header="Amount Loaned (₱)" />
-                            <GridViewColumn Width="150"
+                                            Header="Amount Loaned (PHP)" />
+                            <GridViewColumn Width="Auto"
                                             DisplayMemberBinding="{Binding Jewelry.Type,  Mode=TwoWay}"
                                             Header="Collateral" />
                         </GridView>

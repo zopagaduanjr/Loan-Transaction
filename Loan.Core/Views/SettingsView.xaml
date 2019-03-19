@@ -19,11 +19,11 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <materialDesign:Card MaxWidth="1200" MaxHeight="900" Padding="5,5,0,0"  >
+        <materialDesign:Card MaxWidth="1000" MaxHeight="900" Padding="5,5,0,0"  >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="275"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
@@ -39,6 +39,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <!-- column 0 / Business Jewels-->
                     <StackPanel Grid.Column="0" MaxHeight="320" HorizontalAlignment="Center">
                         <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -46,23 +47,24 @@
                                 <Label Margin="10,0,0,0" Content="Pawned Jewelries" FontWeight="Bold"/>
                             </StackPanel>
                         </TextBlock>
-                        <ListView x:Name="PawnedJewelry"   MaxHeight="320"
+                        <ListView x:Name="PawnedJewelry"   MaxHeight="320" Margin="0,0,0,8"
                                   HorizontalAlignment="Center" HorizontalContentAlignment="Center">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
                                                     Header="Type" />
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding UniqueId,  Mode=TwoWay}"
                                                     Header="Unique Id" />
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
                                                     Header="Actual Value" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </StackPanel>
+                    <!-- column 1 / Business Accounts-->
                     <StackPanel Grid.Column="1" MaxHeight="320" HorizontalAlignment="Center">
                         <TextBlock Height="30" HorizontalAlignment="Left" Grid.Row="0">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -71,16 +73,16 @@
                             </StackPanel>
                         </TextBlock>
                         <ListView x:Name="Customers"  SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}" MaxHeight="320"
-                                  HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+                                  HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,8">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding Name, Mode=TwoWay}"
                                                     Header="Name" />
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding Address,  Mode=TwoWay}"
                                                     Header="Address" />
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="Auto"
                                                     DisplayMemberBinding="{Binding ContactNumber,  Mode=TwoWay}"
                                                     Header="Contact Number" />
                                 </GridView>
@@ -118,6 +120,13 @@
                         Badge="{materialDesign:PackIcon Glasses}"
                         BadgeColorZoneMode="Accent">
                         <Button Content="Random Jewel" Name="AddRandomJewelry" Margin="10,0,0,10"/>
+                    </materialDesign:Badged>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                    <materialDesign:Badged Grid.Column="1" BadgeColorZoneMode="Accent">
+                        <Button Content="Add Customer"   Name="OpenAddCustomer"
+                                Margin="10,0,0,10" materialDesign:RippleAssist.Feedback="#DD000000" />
                     </materialDesign:Badged>
 
                 </StackPanel>

@@ -229,7 +229,9 @@ namespace Loan.Core.ViewModels
             loninfo.Jewelry = jewel;
             loninfo.Customer = personloaning;
             personloaning.Jewelries.Remove(jewel);
+            personloaning.Money += jewel.ActualValue;
             NotifyOfPropertyChange(() => PersonJewelries);
+            NotifyOfPropertyChange(() => personloaning);
             EstablishmentLoanInfo.Add(loninfo);
             personloaning.Loans.Add(loninfo);
             NotifyOfPropertyChange(() => PersonLoanInfo);
@@ -272,6 +274,10 @@ namespace Loan.Core.ViewModels
                     var streng = value.ToString();
                     var lenth = streng.Length;
                     var x = lenth - 8;
+                    if (x < 0)
+                    {
+                        streng = streng + "55";
+                    }
                     streng = streng.Substring(0, streng.Length - x);
                     value = Int32.Parse(streng);
             }
@@ -305,6 +311,11 @@ namespace Loan.Core.ViewModels
         {
             CustomerViewModel.DateTime = CustomerViewModel.DateTime.AddDays(7);
             NotifyOfPropertyChange(() => CustomerViewModel.DateTime);
+            SelectedJewelry = null;
+            SelectedLoan = null;
+            NotifyOfPropertyChange(() => SelectedJewelry);
+            NotifyOfPropertyChange(() => SelectedLoan);
+
 
         }
 

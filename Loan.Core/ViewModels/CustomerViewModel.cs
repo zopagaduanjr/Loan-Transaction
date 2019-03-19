@@ -90,7 +90,8 @@ namespace Loan.Core.ViewModels
             get
             {
                 var mon = SettingsViewModel.SelectedCustomer.Money.ToString();
-                return mon;
+                var monwithp = "₱" + mon;
+                return monwithp;
             }
             set
             {

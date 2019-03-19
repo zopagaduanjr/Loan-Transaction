@@ -1,136 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Caliburn.Micro;
 using Loan.Core.Models;
 using Screen = Caliburn.Micro.Screen;
-using Type = System.Type;
 
 namespace Loan.Core.ViewModels
 {
-    public class SettingsViewModel : Screen
+    public class AddCustomerDialogViewModel : Screen
     {
+        private string _name;
+        private string _address;
+        private string _contactNumber;
+        private string _money;
+        private SettingsViewModel _settingsViewModel;
+        private bool _devMode;
+        private static Random rand = new Random(DateTime.Now.Second);
 
         //ctor
-        public SettingsViewModel()
+        public AddCustomerDialogViewModel()
         {
-            DeveloperMode = true;
-            AddRandomCustomerCommand();
-            AddRandomCustomerCommand();
-            AddRandomCustomerCommand();
-            SelectedCustomer = Customers.FirstOrDefault();
+            
         }
 
-        //properties
-        private static Random rand = new Random(DateTime.Now.Second);
-        private BindableCollection<Customer> _customers = new BindableCollection<Customer>();
-        private Customer _selectedCustomer;
-        private bool _developerMode;
-        private BindableCollection<Jewelry> _pawnedJewelry = new BindableCollection<Jewelry>();
-        private AddCustomerDialogViewModel _addCustomerDialogViewModel = new AddCustomerDialogViewModel();
+        public DialogResult MyDialogResult { get; set; }
 
-
-        public BindableCollection<Customer> Customers
+        public SettingsViewModel SettingsViewModel
         {
-            get => _customers;
+            get => _settingsViewModel;
+            set => _settingsViewModel = value;
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+        public string Address
+        {
+            get => _address;
+            set => _address = value;
+        }
+        public string ContactNumber
+        {
+            get => _contactNumber;
+            set => _contactNumber = value;
+        }
+        public string Money
+        {
+            get => _money;
+            set => _money = value;
+        }
+
+
+        //isclickable
+        public bool DevMode
+        {
+            get
+            {
+                var dem = SettingsViewModel.DeveloperMode;
+                return dem;
+            }
             set
             {
-                _customers = value;
-                NotifyOfPropertyChange(() => Customers);
+                _devMode = value;
+                NotifyOfPropertyChange(() => DevMode);
 
             }
         }
-        public BindableCollection<Jewelry> PawnedJewelry
-        {
-            get => _pawnedJewelry;
-            set
-            {
-                _pawnedJewelry = value;
-                NotifyOfPropertyChange(() => PawnedJewelry);
 
-            }
-        }
-        public Customer SelectedCustomer
+        //command
+        public void AddRandomFields()
         {
-            get => _selectedCustomer;
-            set
-            {
-                _selectedCustomer = value;
-                NotifyOfPropertyChange(() => SelectedCustomer);           
-            }
-        }
-        public AddCustomerDialogViewModel AddCustomerDialogViewModel
-        {
-            get => _addCustomerDialogViewModel;
-            set => _addCustomerDialogViewModel = value;
-        }
-        WindowManager windowManager = new WindowManager();
-        public bool DeveloperMode
-        {
-            get => _developerMode;
-            set
-            {
-                _developerMode = value;
-                NotifyOfPropertyChange(() => DeveloperMode);
-            }
-        }
-
-
-        //methods
-        public void AddRandomCustomerCommand()
-        {
-            var b = Customers;
-            var customer = new Customer();
-            customer.Name = FirstNameGenerator();
-            customer.Address = AddressGenerator();
-            customer.ContactNumber = NumberGenerator(7).ToString();
-            customer.Money = NumberGenerator(5);
-            Customers.Add(customer);
+            Name = FirstNameGenerator();
+            Address = AddressGenerator();
+            ContactNumber = NumberGenerator(7).ToString();
+            Money = NumberGenerator(5).ToString();
+            NotifyOfPropertyChange(() => Name);
+            NotifyOfPropertyChange(() => Address);
+            NotifyOfPropertyChange(() => ContactNumber);
+            NotifyOfPropertyChange(() => Money);
 
         }
-        public void AddRandomJewelry()
+        public void Ok()
         {
-            var jewel = new Jewelry();            
-            var rqual = Enum.GetValues(typeof(Quality));
-            var rtype = Enum.GetValues(typeof(Models.Type));
-            var randomqual = (Quality)rqual.GetValue(rand.Next(rqual.Length));
-            var randomtyp = (Models.Type)rtype.GetValue(rand.Next(rtype.Length));
-            jewel.Type = randomtyp;
-            jewel.Quality = randomqual;
-            jewel.Weight = rand.Next(5,1500);
-            jewel.Discount = rand.NextDouble();
-            jewel.ActualValue = NumberGenerator(4);
-            SelectedCustomer.Jewelries.Add(jewel);
-            NotifyOfPropertyChange(() => SelectedCustomer);
-
+            //Do stuff
+            var cust = new Customer();
+            cust.Name = Name;
+            cust.Address = Address;
+            cust.ContactNumber = ContactNumber;
+            cust.Money = double.Parse(Money);
+            SettingsViewModel.Customers.Add(cust);
+            NotifyOfPropertyChange(() => SettingsViewModel);
+            NotifyOfPropertyChange(() => SettingsViewModel.Customers);
+            MyDialogResult = DialogResult.OK;
+            TryClose();
         }
-        public void DeveloperModeCommand()
+        public void Cancel()
         {
-            DeveloperMode = true;
-            NotifyOfPropertyChange(() => DeveloperMode);
-
-        }
-        public void OpenAddCustomer()
-        {
-            AddCustomerDialogViewModel.SettingsViewModel = this;
-            AddCustomerDialogViewModel.Name = null;
-            AddCustomerDialogViewModel.Address = null;
-            AddCustomerDialogViewModel.ContactNumber = null;
-            AddCustomerDialogViewModel.Money = null;
-            var result = windowManager.ShowDialog(AddCustomerDialogViewModel);
-            if (AddCustomerDialogViewModel.MyDialogResult == DialogResult.OK)
-            {
-                NotifyOfPropertyChange(() => Customers);
-                return;
-            }
-
+            MyDialogResult = DialogResult.Cancel;
+            TryClose();
         }
 
 
@@ -272,7 +244,4 @@ namespace Loan.Core.ViewModels
         }
 
     }
-
 }
-
-

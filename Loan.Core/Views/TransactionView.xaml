@@ -72,19 +72,18 @@
                                     </StackPanel>
                                 </TextBlock>
                                 <ListView x:Name="PersonJewelries" Grid.Row="1" HorizontalAlignment="Center" SelectedItem="{Binding SelectedJewelry, Mode=TwoWay}"
-                                          HorizontalContentAlignment="Center">
+                                          HorizontalContentAlignment="Center" Margin="0,0,0,8">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn Width="150"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding Type, Mode=TwoWay}"
                                                             Header="Type" />
-                                            <GridViewColumn Width="150"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding Quality,  Mode=TwoWay}"
                                                             Header="Quality" />
-                                            <GridViewColumn Width="150"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding ActualValue,  Mode=TwoWay}"
-                                                            Header="Actual Value" />
-
+                                                            Header="Value (PHP)" />
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
@@ -145,7 +144,7 @@
                                             <TextBlock Text="{Binding SelectedJewelry.OtherDetail, Mode=TwoWay}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Actual Value : "/>
+                                            <TextBlock Text="Actual Value : PHP "/>
                                             <TextBlock Text="{Binding SelectedJewelry.ActualValue, Mode=TwoWay}"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -158,7 +157,7 @@
                                 <Expander HorizontalAlignment="Stretch" Header="Loan Info" IsExpanded="True">
                                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Amount To Be Loaned : "/>
+                                            <TextBlock Text="Amount To Be Loaned : PHP "/>
                                             <TextBlock Text="{Binding SelectedJewelry.ActualValue, Mode=TwoWay}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
@@ -170,12 +169,11 @@
                                 <Button x:Name="LoanTransactionCommand" Margin="50,0,0,0" IsEnabled="{Binding LoanTransactionCondition, Mode=TwoWay}"
                                          HorizontalAlignment="Left" Height="35" >
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <materialDesign:PackIcon Kind="CartOff" Width="21" Height="21" />
+                                        <materialDesign:PackIcon Kind="Cart" Width="21" Height="21" />
                                         <Label Margin="10,0,0,0" Content="Continue to loan"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
-
                         </materialDesign:Card>
                     </Grid>
                     <!--Payment Grid-->
@@ -202,19 +200,16 @@
                                     </StackPanel>
                                 </TextBlock>
                                 <ListView x:Name="PersonLoanInfo" Grid.Row="1" HorizontalAlignment="Center" SelectedItem="{Binding SelectedLoan, Mode=TwoWay}"
-                                          HorizontalContentAlignment="Center">
+                                          HorizontalContentAlignment="Center" Margin="0,0,0,8" >
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn Width="120"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding DateTime, Mode=TwoWay}"
                                                             Header="Contract Date" />
-                                            <GridViewColumn Width="80"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding Jewelry.Type,  Mode=TwoWay}"
                                                             Header="Colateral" />
-                                            <GridViewColumn Width="120"
-                                                            DisplayMemberBinding="{Binding Amount,  Mode=TwoWay}"
-                                                            Header="Debt(PHP)" />
-                                            <GridViewColumn Width="80"
+                                            <GridViewColumn Width="Auto"
                                                             DisplayMemberBinding="{Binding Jewelry.UniqueId,  Mode=TwoWay}"
                                                             Header="Jewel Id" />
 
@@ -252,10 +247,9 @@
                                             <TextBlock Text="{Binding SelectedLoan.Jewelry.UniqueId, Mode=TwoWay}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Amount Borrowed : "/>
+                                            <TextBlock Text="Amount Borrowed : PHP "/>
                                             <TextBlock Text="{Binding SelectedLoan.Amount, Mode=TwoWay}"/>
                                         </StackPanel>
-
                                     </StackPanel>
                                 </Expander>
                                 <Border
@@ -263,21 +257,20 @@
                                     Height="1"
                                     HorizontalAlignment="Stretch"
                                     SnapsToDevicePixels="True" />
-                                <Expander HorizontalAlignment="Stretch" Header="Calculations">
+                                <!--Loans Calculation 0-->
+                                <Expander HorizontalAlignment="Stretch" Header="Calculations" IsExpanded="True">
                                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Days Passed : "/>
                                             <TextBlock Text="{Binding DaysPassed, Mode=TwoWay}"/>
                                         </StackPanel>
-
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Amount To Pay : "/>
+                                            <TextBlock Text="Amount To Pay : PHP "/>
                                             <TextBlock Text="{Binding SelectedLoan.CheckOutAmount, Mode=TwoWay}"/>
                                         </StackPanel>
-
                                     </StackPanel>
                                 </Expander>
-                                <Button x:Name="PaymentTransactionCommand" Margin="50,0,0,0" IsEnabled="{Binding PaymentTransactionCondition, Mode=TwoWay}"
+                                <Button x:Name="PaymentTransactionCommand" Margin="50,0,0,20" IsEnabled="{Binding PaymentTransactionCondition, Mode=TwoWay}"
                                          HorizontalAlignment="Left" Height="35" >
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="FontAwesome" Width="21" Height="21" />

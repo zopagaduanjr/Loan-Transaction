@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using Caliburn.Micro;
 using Loan.Core.Models;
 using Loan.Core.Views;
@@ -41,6 +43,7 @@ namespace Loan.Core.ViewModels
             transactionViewModel.LoanTransactViewer();
             ActivateItem(transactionViewModel);
         }
+
 
     }
 }
