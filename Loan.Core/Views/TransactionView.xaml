@@ -164,6 +164,10 @@
                                             <TextBlock Text="Date of Transaction : "/>
                                             <TextBlock Text="{Binding DateTime, Mode=TwoWay}"/>
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Your Wallet : PHP "/>
+                                            <TextBlock Text="{Binding Money, Mode=TwoWay}"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Expander>
                                 <Button x:Name="LoanTransactionCommand" Margin="50,0,0,0" IsEnabled="{Binding LoanTransactionCondition, Mode=TwoWay}"
@@ -261,12 +265,27 @@
                                 <Expander HorizontalAlignment="Stretch" Header="Calculations" IsExpanded="True">
                                     <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Amount Borrowed : PHP "/>
+                                            <TextBlock Text="{Binding SelectedLoan.Amount, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Days Passed : "/>
                                             <TextBlock Text="{Binding DaysPassed, Mode=TwoWay}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Interest Rate per Week : 10%"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Interest Incurred : PHP "/>
+                                            <TextBlock Text="{Binding Interest, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Amount To Pay : PHP "/>
                                             <TextBlock Text="{Binding SelectedLoan.CheckOutAmount, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Your Wallet : PHP "/>
+                                            <TextBlock Text="{Binding Money, Mode=TwoWay}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>

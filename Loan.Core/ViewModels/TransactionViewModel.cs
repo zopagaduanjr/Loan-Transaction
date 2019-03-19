@@ -37,6 +37,8 @@ namespace Loan.Core.ViewModels
         private LoanInfo _selectedLoan;
         private string _daysPassed;
         private SettingsViewModel _settingsViewModel;
+        private string _interest;
+        private string _money;
 
         public CustomerViewModel CustomerViewModel
         {
@@ -124,10 +126,12 @@ namespace Loan.Core.ViewModels
                     _selectedLoan = value;
                     value.CheckOutAmount = InterestCalculator();
                     DaysPassed = TotalDaysCalculator().ToString();
+                    Interest = (value.CheckOutAmount - value.Amount).ToString();
                     PaymentTransactionCondition = true;
                     NotifyOfPropertyChange(() => SelectedLoan);
                     NotifyOfPropertyChange(() => PaymentTransactionCondition);
                     NotifyOfPropertyChange(() => DaysPassed);
+                    NotifyOfPropertyChange(() => Interest);
 
                 }
                 else
@@ -135,9 +139,11 @@ namespace Loan.Core.ViewModels
                     _selectedLoan = value;
                     DaysPassed = null;
                     PaymentTransactionCondition = false;
+                    Interest = null;
                     NotifyOfPropertyChange(() => SelectedLoan);
                     NotifyOfPropertyChange(() => PaymentTransactionCondition);
                     NotifyOfPropertyChange(() => DaysPassed);
+                    NotifyOfPropertyChange(() => Interest);
 
                 }
             }
@@ -167,6 +173,27 @@ namespace Loan.Core.ViewModels
         {
             get => _dateTime;
             set => _dateTime = value;
+        }
+
+        public string Money
+        {
+            get
+            {
+                var gg = SettingsViewModel.SelectedCustomer.Money.ToString();
+                return gg;
+            }
+            set
+            {
+                _money = value;
+                NotifyOfPropertyChange(() => Money);
+
+            }
+        }
+
+        public string Interest
+        {
+            get => _interest;
+            set => _interest = value;
         }
 
         public string DaysPassed
@@ -230,7 +257,9 @@ namespace Loan.Core.ViewModels
             loninfo.Customer = personloaning;
             personloaning.Jewelries.Remove(jewel);
             personloaning.Money += jewel.ActualValue;
+            Money = personloaning.Money.ToString();
             NotifyOfPropertyChange(() => PersonJewelries);
+            NotifyOfPropertyChange(() => Money);
             NotifyOfPropertyChange(() => personloaning);
             EstablishmentLoanInfo.Add(loninfo);
             personloaning.Loans.Add(loninfo);
@@ -248,9 +277,13 @@ namespace Loan.Core.ViewModels
                 SettingsViewModel.SelectedCustomer.Jewelries.Add(SelectedLoan.Jewelry);
                 SettingsViewModel.PawnedJewelry.Remove(SelectedLoan.Jewelry);
                 SettingsViewModel.SelectedCustomer.Loans.Remove(SelectedLoan);
+                Money = SettingsViewModel.SelectedCustomer.Money.ToString();
+                SelectedLoan = PersonLoanInfo.FirstOrDefault();
                 NotifyOfPropertyChange(() => SettingsViewModel.SelectedCustomer);
                 NotifyOfPropertyChange(() => PersonLoanInfo);
+                NotifyOfPropertyChange(() => SelectedLoan);
                 NotifyOfPropertyChange(() => SettingsViewModel.PawnedJewelry);
+                NotifyOfPropertyChange(() => Money);
 
             }
             NotifyOfPropertyChange(() => SelectedLoan);
