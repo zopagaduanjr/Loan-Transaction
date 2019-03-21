@@ -6,7 +6,7 @@ WPF | Caliburn.Micro
 | ------------- |:-------------:|
 | ![Problem1](media/prob1.JPG)      | ![Analysis](media/sol1.JPG)  |
 ### Proposal
-| Scenario | Application |
+| Scenario | Implementation |
 | ------------- |:-------------:|
 | ![Scenario1](media/scene1.JPG)      | ![Application1](media/1stscene.gif)  |
 | ![Scenario2](media/scene2.JPG)      | ![Application2](media/2ndscene.gif)  |
